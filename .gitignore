@@ -9,7 +9,6 @@ build
 .grunt
 *.log
 *.pid
-.travis.yml
 desktop.ini
 *.sublime-project
 *.sublime-workspace

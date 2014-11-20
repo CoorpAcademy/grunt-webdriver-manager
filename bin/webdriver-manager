@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+'use strict';
+
+var path = require('path');
+var optimist = require('optimist');
+var WebdriverManager = require('../tasks/lib/webdriver-manager');
+
+var SELENIUM_DIR = path.join(__dirname, '/../selenium');
+
+var cli = optimist.
+    usage('Usage: webdriver-manager <command>\n' +
+        'Commands:\n' +
+        '  update: install or update selected binaries\n' +
+        '  start: start up the selenium server\n' +
+        '  status: list the current available drivers\n' +
+        '  clean : remove all binaries').
+    describe('out_dir', 'Location to output/expect ').
+    default('out_dir', SELENIUM_DIR).
+    describe('seleniumPort', 'Optional port for the selenium standalone server').
+    describe('ignore_ssl', 'Ignore SSL certificates').boolean('ignore_ssl').
+    default('ignore_ssl', false).
+    describe('proxy', 'Proxy to use for the install or update command');
+
+var options = cli.
+    check(function(arg) {
+      if (arg._.length !== 1) {
+        throw 'Please specify one command';
+      }
+    }).
+    argv;
+
+var webdriverManager = new WebdriverManager(options);
+
+for (var bin in webdriverManager.binaries) {
+  if (!webdriverManager.binaries.hasOwnProperty(bin)) {
+      continue;
+  }
+  cli.describe(bin, 'Install or update ' + webdriverManager.binaries[bin].name).
+  boolean(bin).
+  default(bin, webdriverManager.binaries[bin].isDefault);
+}
+
+switch (options._[0]) {
+  case'start':
+    webdriverManager.start()
+      .then(function() {
+        console.log('Server started');
+        process.stdin.resume();
+        process.stdin.on('data', function(chunk) {
+          console.log('Attempting to shut down selenium nicely');
+          webdriverManager.stop().then(process.exit);
+        }.bind(this));
+      })
+      .catch(function(code) {
+        switch (code){
+          case 1000:
+            console.error('Selenium Standalone is not present. Install with ' +
+              'webdriver-manager update --standalone');
+          break;
+        }
+        process.exit(code);
+      })
+    ;
+    break;
+  case 'status':
+    webdriverManager.status();
+    break;
+  case 'update':
+    webdriverManager.update();
+    break;
+  case 'clean':
+    webdriverManager.clean();
+    break;
+  default:
+    console.error('Invalid command');
+    optimist.showHelp();
+}

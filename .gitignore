@@ -1,0 +1,15 @@
+.idea
+.DS_Store
+node_modules/
+selenium/*
+tests/coverage/
+.tmp
+data/
+build
+.grunt
+*.log
+*.pid
+.travis.yml
+desktop.ini
+*.sublime-project
+*.sublime-workspace

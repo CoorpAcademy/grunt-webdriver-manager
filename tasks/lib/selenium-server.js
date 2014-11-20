@@ -29,7 +29,7 @@ LocalDriverProvider.prototype.addDefaultBinaryLocs_ = function() {
     this.config_.seleniumServerJar = path.resolve(path.join(this.config_.out_dir, '/selenium-server-standalone-' +
         utils.versions().selenium + '.jar'));
   }
-  if (this.config_.capabilities.browserName === 'chrome') {
+  if (this.config_.capabilities.browserName === 'chrome' || this.config_.capabilities.browserName === 'firefox') {
     this.config_.chromeDriver = this.config_.chromeDriver ||
         path.resolve(path.join(this.config_.out_dir, '/chromedriver'));
 
@@ -53,8 +53,6 @@ LocalDriverProvider.prototype.addDefaultBinaryLocs_ = function() {
  */
 LocalDriverProvider.prototype.start = function() {
   var deferred = q.defer();
-  var self = this;
-
   this.addDefaultBinaryLocs_();
   if (!fs.existsSync(this.config_.seleniumServerJar)) {
     throw new Error('there\'s no selenium server jar at the specified ' +
@@ -76,11 +74,11 @@ LocalDriverProvider.prototype.start = function() {
   // start local server, grab hosted address, and resolve promise
   this.server_.start().then(function(url) {
     this.grunt.log.writeln('Selenium standalone server started at ' + url);
-    self.server_.address().then(function(address) {
-      self.config_.seleniumAddress = address;
+    this.server_.address().then(function(address) {
+      this.config_.seleniumAddress = address;
       deferred.resolve();
-    });
-  });
+    }.bind(this));
+  }.bind(this));
 
   return deferred.promise;
 };

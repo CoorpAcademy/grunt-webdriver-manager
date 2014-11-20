@@ -12,11 +12,22 @@ module.exports = function(grunt) {
                 'tests/**/*Spec.js'
                 ]
             }
+        },
+        webdrivermanager: {
+            out_dir: './selenium',
+            capabilities: {
+                browserName: 'chrome'
+            },
+            seleniumArgs: [],
+            seleniumPort: 4444,
+            ignore_ssl: false,
+            proxy: false,
+            method: 'GET'
         }
     });
 
-    // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.task.loadTasks('./tasks/');
 
     // Default task(s).
     grunt.registerTask('test', ['mochaTest']);

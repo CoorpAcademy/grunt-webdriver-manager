@@ -18,7 +18,7 @@ var _ = require('lodash');
 var SELENIUM_DIR = path.join(__dirname, '/../../selenium');
 
 var defaultOptions = {
-  out_dir: SELENIUM_DIR,
+  out_dir: SELENIUM_DIR,  
   ignore_ssl: false,
   proxy: false,
   method: 'GET'
@@ -103,10 +103,9 @@ var searchForFilePattern = function(existingFiles, bin) {
   });
 };
 
-var checkBinariesExists = function(out_dir) {
+var checkBinariesExists = function(out_dir, binaries) {
   // Setup before any command.
   var existingFiles = fs.readdirSync(out_dir);
-  var binaries = getBinaries();
   for (var name in binaries) {
     if (!binaries.hasOwnProperty(name)) {
       continue;
@@ -255,11 +254,11 @@ WebDriverCli.prototype.setOptions = function(options) {
 WebDriverCli.prototype.init = function() {
   this.binaries = getBinaries();
   ensureSeleniumDirectory(this.options.out_dir);
-  this.existingFiles = checkBinariesExists(this.options.out_dir);
+  this.existingFiles = checkBinariesExists(this.options.out_dir, this.binaries);
 };
 
 WebDriverCli.prototype.status = function() {
-  var binaries = getBinaries();
+  var binaries = this.binaries;
   for (var name in binaries) {
     if (!binaries.hasOwnProperty(name)) {
       continue;
@@ -269,7 +268,7 @@ WebDriverCli.prototype.status = function() {
       this.grunt.log.writeln(bin.name + ' is up to date');
     }
     else if (bin.outOfDateExists) {
-      this.grunt.log.writeln('**' + bin.name + ' needs to be updated');
+      this.grunt.log.writeln(bin.name + ' needs to be updated');
     }
     else {
       this.grunt.log.writeln(bin.name + ' is not present');
@@ -278,7 +277,7 @@ WebDriverCli.prototype.status = function() {
 };
 
 WebDriverCli.prototype.update = function() {
-  var binaries = getBinaries();
+  var binaries = this.binaries;
   var deferreds = [];
   if (this.options.standalone) {
     var deferredS = q.defer();
@@ -336,6 +335,7 @@ WebDriverCli.prototype.clean = function() {
   existingFiles.forEach(function(file) {
     fs.unlinkSync(path.join(this.options.out_dir, file));
   }.bind(this));
+  this.init();
 };
 
 module.exports = WebDriverCli;

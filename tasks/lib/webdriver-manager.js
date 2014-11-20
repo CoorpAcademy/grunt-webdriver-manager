@@ -48,6 +48,11 @@ WebDriverManager.prototype.update = function(binary) {
     if (binary) {
         this.options[binary] = true;
     }
+    else {
+        this.options.chrome = true;
+        this.options.ie = true;
+        this.options.standalone = true;
+    }
     return this.webDriverCli.update();
 };
 
@@ -85,7 +90,8 @@ WebDriverManager.prototype.stop = function() {
     }
 
     var deferred = q.defer();
-    return deferred.promise.isFulfilled();
+    deferred.resolve();
+    return deferred.promise;
 };
 
 process.on('exit', function() {

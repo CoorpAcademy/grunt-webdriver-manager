@@ -1,6 +1,6 @@
 {
   "name": "grunt-webdriver-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Grunt task for webdriver automation",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "webdriver"
   ],
   "author": "Loïc Calvy",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "adm-zip": "^0.4.4",
     "debug": "^1.0.2",

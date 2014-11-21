@@ -12,17 +12,6 @@ module.exports = function(grunt) {
                 'tests/**/*Spec.js'
                 ]
             }
-        },
-        webdrivermanager: {
-            out_dir: './selenium',
-            capabilities: {
-                browserName: 'chrome'
-            },
-            seleniumArgs: [],
-            seleniumPort: 4444,
-            ignore_ssl: false,
-            proxy: false,
-            method: 'GET'
         }
     });
 

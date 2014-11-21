@@ -55,6 +55,7 @@ webdrivermanager: {
  * Refactor code to externalize webdriver-manager to standalone package
 
 ## Release History
+ * v0.0.3   Fix issue in grunt async context
  * v0.0.2   Add license MIT
  * v0.0.1   First release with driver download support and selenoum server start
 

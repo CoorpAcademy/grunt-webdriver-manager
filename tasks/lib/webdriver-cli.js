@@ -20,8 +20,7 @@ var SELENIUM_DIR = path.join(__dirname, '/../../selenium');
 var defaultOptions = {
   out_dir: SELENIUM_DIR,  
   ignore_ssl: false,
-  proxy: false,
-  method: 'GET'
+  proxy: false
 };
 
 /**
@@ -327,7 +326,7 @@ WebDriverCli.prototype.update = function() {
         deferredI.resolve(fileName);
       }.bind(this));
   }
-  return q.all(deferreds);
+  return q.allSettled(deferreds);
 };
 
 WebDriverCli.prototype.clean = function() {

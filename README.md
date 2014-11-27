@@ -53,8 +53,11 @@ webdrivermanager: {
 ## Roadmap
  * Improve documentation
  * Refactor code to externalize webdriver-manager to standalone package
+ * Improve package corrumption detection based on size
+ * Test on Windows
 
 ## Release History
+ * v0.0.4   Fix issue on return result of update method
  * v0.0.3   Fix issue in grunt async context
  * v0.0.2   Add license MIT
  * v0.0.1   First release with driver download support and selenoum server start

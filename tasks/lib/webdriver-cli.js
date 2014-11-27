@@ -326,7 +326,18 @@ WebDriverCli.prototype.update = function() {
         deferredI.resolve(fileName);
       }.bind(this));
   }
-  return q.allSettled(deferreds);
+  return q.allSettled(deferreds).then(function(results) {
+      var values = [];
+      results.forEach(function(result) {
+          if (result.state === 'fulfilled') {
+              values.push(result.value);
+          }
+          else {
+              values.push(false);
+          }
+      });
+      return values;
+  });
 };
 
 WebDriverCli.prototype.clean = function() {

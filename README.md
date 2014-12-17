@@ -57,6 +57,7 @@ webdrivermanager: {
  * Test on Windows
 
 ## Release History
+ * v0.0.5   Fix issue loading x32 chrome driver on x64 host
  * v0.0.4   Fix issue on return result of update method
  * v0.0.3   Fix issue in grunt async context
  * v0.0.2   Add license MIT

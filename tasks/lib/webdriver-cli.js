@@ -57,7 +57,7 @@ var getBinaries = function() {
           return urlPrefix + 'mac32.zip';
         }
         else if (utils.isLinux()) {
-          if (utils.isX64() === 'x64') {
+          if (utils.isX64()) {
             return urlPrefix + 'linux64.zip';
           }
           else {

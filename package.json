@@ -4,7 +4,8 @@
   "description": "Grunt task for webdriver automation",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/grunt-cli/bin/grunt test"
+    "test": "./node_modules/grunt-cli/bin/grunt test",
+    "shrinkwrap": "npm-shrinkwrap"
   },
   "keywords": [
     "webdriver"
@@ -24,7 +25,8 @@
   },
   "devDependencies": {
     "grunt-cli": "latest",
-    "grunt-mocha-test": "^0.11.0"
+    "grunt-mocha-test": "^0.11.0",
+    "npm-shrinkwrap-install": "0.0.3"
   },
   "webdriverVersions": {
     "selenium": "2.45.0",

@@ -31,8 +31,9 @@ var shortVersion = function(version) {
   return version.slice(0, version.lastIndexOf('.'));
 };
 
-var getBinaries = function() {
-  var versions = utils.versions();
+var getBinaries = function(options) {
+  options = options  || {};
+  var versions = utils.versions(options.webdriverVersions);
   return {
     standalone: {
       name: 'selenium standalone',
@@ -251,7 +252,7 @@ WebDriverCli.prototype.setOptions = function(options) {
 };
 
 WebDriverCli.prototype.init = function() {
-  this.binaries = getBinaries();
+  this.binaries = getBinaries(this.options);
   ensureSeleniumDirectory(this.options.out_dir);
   this.existingFiles = checkBinariesExists(this.options.out_dir, this.binaries);
 };

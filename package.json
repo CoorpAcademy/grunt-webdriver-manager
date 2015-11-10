@@ -1,6 +1,6 @@
 {
   "name": "grunt-webdriver-manager",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Grunt task for webdriver automation",
   "main": "index.js",
   "scripts": {

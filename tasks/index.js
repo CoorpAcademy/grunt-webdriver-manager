@@ -5,6 +5,7 @@ var WebdriverManager = require('./lib/webdriver-manager');
 module.exports = function(grunt) {
     grunt.registerTask('webdrivermanager', 'Handle selenium webdriver task', function(command, arg1) {
         var options = grunt.config('webdrivermanager') || {};
+        grunt.verbose.writeln(options);
         var webdriverManager = new WebdriverManager(options, grunt);
         var done = this.async();
         switch (command) {

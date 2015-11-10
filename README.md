@@ -38,15 +38,20 @@ Path of file download storage.
 Example:
 ```js
 webdrivermanager: {
-  out_dir: './selenium',
-  capabilities: {
-    browserName: 'chrome'
-  },
-  seleniumArgs: [],
-  seleniumPort: 4444,
-  ignore_ssl: false,
-  proxy: false,
-  method: 'GET'
+    out_dir: './selenium',
+    capabilities: {
+        browserName: 'chrome'
+    },
+    seleniumArgs: [],
+    seleniumPort: 4444,
+    ignore_ssl: false,
+    proxy: false,
+    method: 'GET',
+    webdriverVersions: {
+        selenium: '2.44.0',
+        chromedriver: '2.12',
+        iedriver: '2.44.0"
+    }
 }
 ```
 
@@ -57,6 +62,7 @@ webdrivermanager: {
  * Test on Windows
 
 ## Release History
+ * v0.0.6   Allow change webdriver versions with configuration
  * v0.0.5   Fix issue loading x32 chrome driver on x64 host
  * v0.0.4   Fix issue on return result of update method
  * v0.0.3   Fix issue in grunt async context

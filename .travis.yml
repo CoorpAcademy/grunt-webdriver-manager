@@ -1,4 +1,13 @@
 language: node_js
 node_js:
-- '0.11'
+- '0.12'
 - '0.10'
+deploy:
+  provider: npm
+  email: system@coorpacademy.com
+  api_key:
+    secure: jUJy/+DSyKHwkUg2//7IAyzlxjQBRIkprA3sSBkdB0EpXp22Fna9CrRU10xQN9+8E4kXkDgfNmaXsG3l1cB4MhaXC6hjEmjPTo8EstZXOpgT9WZIYldqfTYInTpxGIfXAJDPsGdmM9w+7QlPF0h5y3+ZNrzwW9JwWqm7i7eTc2k=
+  on:
+    repo: CoorpAcademy/grunt-webdriver-manager
+  on:
+    branch: master

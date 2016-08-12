@@ -11,7 +11,7 @@ var cli = optimist.
     usage('Usage: webdriver-manager <command>\n' +
         'Commands:\n' +
         '  update: install or update selected binaries\n' +
-        '  start: start up the selenium server\n' +
+        '  start [-d]: start up the selenium server\n' +
         '  status: list the current available drivers\n' +
         '  clean : remove all binaries').
     describe('out_dir', 'Location to output/expect ').
@@ -23,7 +23,7 @@ var cli = optimist.
 
 var options = cli.
     check(function(arg) {
-      if (arg._.length !== 1) {
+      if (arg._.length < 1) {
         throw 'Please specify one command';
       }
     }).
@@ -45,6 +45,12 @@ switch (options._[0]) {
     webdriverManager.start()
       .then(function() {
         console.log('Server started');
+        if (options.d) {
+            process.on('exit', function() {
+                webdriverManager.stop().then(process.exit);
+            });
+            return;
+        }
         process.stdin.resume();
         process.stdin.on('data', function(chunk) {
           console.log('Attempting to shut down selenium nicely');

@@ -96,7 +96,10 @@ WebDriverManager.prototype.stop = function() {
 
 process.on('exit', function() {
     for (var i = 0; i < webDriverManagers.length;i++) {
-        webDriverManagers[i].stop();
+        console.log(webDriverManagers[i].options);
+        if(!webDriverManagers[i].options.daemon) {
+            webDriverManagers[i].stop();
+        }
     }
 });
 

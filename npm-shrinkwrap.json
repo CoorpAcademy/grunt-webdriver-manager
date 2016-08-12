@@ -1,6 +1,6 @@
 {
   "name": "grunt-webdriver-manager",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "npm-shrinkwrap-version": "5.4.0",
   "node-version": "v0.12.7",
   "dependencies": {

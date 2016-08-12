@@ -62,6 +62,7 @@ webdrivermanager: {
  * Test on Windows
 
 ## Release History
+ * v0.0.8   support background with & https://www.maketecheasier.com/run-bash-commands-background-linux/
  * v0.0.7   -d (daemon) flag on cli start command
  * v0.0.6   Allow change webdriver versions with configuration
  * v0.0.5   Fix issue loading x32 chrome driver on x64 host

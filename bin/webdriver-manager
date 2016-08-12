@@ -28,7 +28,7 @@ var options = cli.
       }
     }).
     argv;
-
+options.daemon = options.daemon || options.d;
 var webdriverManager = new WebdriverManager(options);
 
 for (var bin in webdriverManager.binaries) {
@@ -44,13 +44,11 @@ switch (options._[0]) {
   case'start':
     webdriverManager.start()
       .then(function() {
-        console.log('Server started');
         if (options.d) {
-            process.on('exit', function() {
-                webdriverManager.stop().then(process.exit);
-            });
+            console.log('Server started as daemon');
             return;
         }
+        console.log('Server started');
         process.stdin.resume();
         process.stdin.on('data', function(chunk) {
           console.log('Attempting to shut down selenium nicely');

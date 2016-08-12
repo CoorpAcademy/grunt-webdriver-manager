@@ -50,7 +50,7 @@ webdrivermanager: {
     webdriverVersions: {
         selenium: '2.44.0',
         chromedriver: '2.12',
-        iedriver: '2.44.0"
+        iedriver: '2.44.0'
     }
 }
 ```
@@ -62,6 +62,7 @@ webdrivermanager: {
  * Test on Windows
 
 ## Release History
+ * v0.0.7   -d (daemon) flag on cli start command
  * v0.0.6   Allow change webdriver versions with configuration
  * v0.0.5   Fix issue loading x32 chrome driver on x64 host
  * v0.0.4   Fix issue on return result of update method

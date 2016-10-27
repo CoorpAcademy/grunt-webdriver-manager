@@ -18,7 +18,7 @@ var _ = require('lodash');
 var SELENIUM_DIR = path.join(__dirname, '/../../selenium');
 
 var defaultOptions = {
-  out_dir: SELENIUM_DIR,  
+  out_dir: SELENIUM_DIR,
   ignore_ssl: false,
   proxy: false
 };
@@ -30,6 +30,25 @@ var defaultOptions = {
 var shortVersion = function(version) {
   return version.slice(0, version.lastIndexOf('.'));
 };
+
+function isMac64(versions) {
+    //x64 since 2.23
+    var versionsSplited = versions.split('.');
+    var major = parseInt(versionsSplited[0]);
+    var minor = parseInt(versionsSplited[1]);
+    if(major > 2) {
+        return true;
+    }
+    if(major <= 1) {
+        return false;
+    }
+
+    if(minor >= 23) {
+        return true;
+    }
+    return false;
+
+}
 
 var getBinaries = function(options) {
   options = options  || {};
@@ -55,7 +74,10 @@ var getBinaries = function(options) {
         var urlPrefix = 'https://chromedriver.storage.googleapis.com/' +
             versions.chromedriver + '/chromedriver_';
         if (utils.isMac()) {
-          return urlPrefix + 'mac32.zip';
+            if (isMac64(versions.chromedriver)) {
+                return urlPrefix + 'mac64.zip';
+            }
+            return urlPrefix + 'mac32.zip';
         }
         else if (utils.isLinux()) {
           if (utils.isX64()) {

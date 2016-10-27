@@ -1,6 +1,6 @@
 {
   "name": "grunt-webdriver-manager",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Grunt task for webdriver automation",
   "main": "index.js",
   "scripts": {
@@ -29,9 +29,9 @@
     "npm-shrinkwrap-install": "0.0.3"
   },
   "webdriverVersions": {
-    "selenium": "2.45.0",
-    "chromedriver": "2.12",
-    "iedriver": "2.44.0"
+    "selenium": "2.53.1",
+    "chromedriver": "2.24",
+    "iedriver": "2.53.0"
   },
   "bin": {
     "webdriver-manager": "bin/webdriver-manager"

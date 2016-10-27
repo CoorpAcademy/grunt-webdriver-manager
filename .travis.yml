@@ -5,10 +5,5 @@ node_js:
 - '0.12'
 before_install:
 - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-deploy:
-  provider: npm
-  email: system@coorpacademy.com
-  on:
-    branch: master
-  api_key:
-    secure: eI1msgp0L+dMhtlUGirSA1fqGYDnfPMpZJX6Az/ly/7uHyqA+k3/K7SgittgQgxOScM3TTii6XoOoaEoZzXxf+lHdyK7iNdip8NfVnSenlKqhPheE/TUEgpKbM4jpU6svyQDvvfgOPUrNkMMlipdI5bhZgbaSS8C2SxUKhtm8DU=
+after_success:
+- ./scripts/npm_publish_tag.sh
